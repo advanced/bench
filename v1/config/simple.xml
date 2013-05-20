@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE tsung SYSTEM "/usr/share/tsung/tsung-1.0.dtd">
+<tsung loglevel="notice" version="1.0">
+ 
+<clients>
+    <client host="localhost"  maxusers="40000">
+      <ip value="10.122.5.230"/>
+    </client>
+  </clients>
+ 
+  <servers>
+    <server host="ec2-54-250-1-128.ap-northeast-1.compute.amazonaws.com" port="3200" type="tcp"/>
+  </servers>
+ 
+  <load>
+   <arrivalphase phase="1" duration="10" unit="minute">
+   <users maxnumber="15000" arrivalrate="8" unit="second"/>
+  </arrivalphase>
+ 
+ </load>
+ 
+ <sessions>
+   <session probability="100" name="ab" type="ts_http">
+       <for from="1" to="100" var="i">
+            <request> <http url="/" method="GET" version="1.1"/> </request>
+      </for>
+  </session>
+ </sessions>
+</tsung>
